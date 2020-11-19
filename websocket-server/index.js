@@ -15,18 +15,28 @@ const server = http.createServer(app);
 //Inicializa um instancia de servidor websocket a partir do servidor http
 const wss = new WebSocket.Server({ server });
 
+const connections = [];
+
 // Função responsável por manusear a conexão websocket
 wss.on("connection", (ws) => {
   // Função que trata as mensagens recebidas pelo servidor
   ws.on("message", (payload) => {
     console.log(payload);
     payload = JSON.parse(payload);
+    
     var resultado = {
-      "resultado": realizaCalculo(payload.mensagem),
-      "usuario": payload.usuario
+      "mensagem": realizaCalculo(payload.mensagem),
+      "usuario": "Calculadora"
     };
-
-    ws.send(JSON.stringify(resultado));
+    
+    if(connections.indexOf(ws) < 0){
+      connections.push(ws);
+    }
+    connections.map(function (c) {
+      c.send(JSON.stringify(payload));
+      c.send(JSON.stringify(resultado));
+    });  
+    
   });
 });
 

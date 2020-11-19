@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <title>Demonstração - WebSocket</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="page-wrapper">
+      <h1>Testando o protocolo Websocket</h1>
+
+      <div id="status">Conectando...</div>
+
+      <ul id="messages"></ul>
+
+      <form id="message-form" action="#" method="post">
+        <textarea
+          id="message"
+          placeholder="Escreva uma mensagem para enviar via WebSocket..."
+          required
+        ></textarea>
+        <input type="hidden" id="hddUsuario">
+        <button type="submit">Enviar mensagem</button>
+        <button type="button" id="close">Finalizar conexão</button>
+      </form>
+    </div>
+    
+    <!--Modal usuario-->
+    <div id="divModal" class="modal">
+        <span onclick="document.getElementById('divModal').style.display='none'" class="close" title="Close Modal">×</span>
+        <form class="modal-content" action="/action_page.php">
+          <div class="container">
+            <h1>Chat de cálculo</h1>
+            <p>Digite um nome para entrar no chat.</p>
+            <input type="text" id="txtUsuario"> </textarea>
+            <div class="clearfix">
+              <button type="button" onclick="fecharModal()" class="modalButton">Entrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    <!--Modal usuario-->
+
+    <script src="app.js"></script>
+    </body>
+</html>
+
+
